@@ -1,210 +1,213 @@
 \section{Технический проект}
 \subsection{Общая характеристика организации решения задачи}
 
-Разрабатывается серверная часть веб-приложения для чат-платформы, обеспечивающая REST API для взаимодействия между клиентской частью и базой данных. Сервер реализует следующие основные функции:
-\begin{itemize}
+Разрабатывается клиентская сторона веб-приложения для чат-платформы, обеспечивающая взаимодействие пользователя с серверной частью программы и базой данных. Клиентская сторона реализует следующие основные функции:
+\begin{enumerate}
 	\item Аутентификация и авторизация пользователей
 	\item Обмен сообщениями в групповых чатах
 	\item Личная переписка между пользователями
 	\item Управление группами и правами участников
 	\item Работа с вложениями и медиафайлами
-\end{itemize}
+\end{enumerate}
 
 \subsection{Обоснование выбора технологии проектирования}
 
-Для реализации серверной части выбраны следующие технологии:
+Для реализации клиентской стороны выбраны следующие технологии:
 
-\subsubsection{Язык программирования Python}
+\subsubsection{Язык программирования JavaScript}
 
-Python выбран благодаря:
+JavaScript выбран благодаря:
 \begin{itemize}
+	\item Поддержки в браузерах
 	\item Простоте и читаемости кода
-	\item Богатой экосистеме веб-фреймворков
-	\item Хорошей поддержке работы с базами данных
+	\item Популярности и востребованности
 	\item Кроссплатформенности
+	\item Асинхронности и динамике
 \end{itemize}
 
-\subsubsection{Фреймворк WSGI}
+\subsubsection{Язык программирования CSS}
 
-В качестве основы сервера используется WSGI (Web Server Gateway Interface) - стандартный интерфейс между веб-сервером и Python-приложениями. Преимущества:
+В качестве основы разметки используется CSS (Cascading Style Sheets) - основной язык стилизации, обеспечивающий гибкость и удобство работы с дизайном:
 \begin{itemize}
-	\item Легковесность
-	\item Простота развертывания
-	\item Совместимость с различными серверами (Waitress, Gunicorn и др.)
+	\item Легковесность - стили загружаются отдельно от HTML
+	\item Простота развертывания - подключение к HTML через встроенные стили
+	\item Совместимость - работает во всех современных браузерах
+	\item Адаптивность - поддержка медиа-запросов для различных устройств
 \end{itemize}
 
-\subsubsection{База данных SQLite}
+\subsubsection{Язык разметки HTML}
 
-SQLite выбрана как:
+В качестве основы структуры веб-страницы используется HTML (HyperText Markup Language) - главный язык разметки, обеспечивающий логическую организацию контента и взаимодействие с CSS и JavaScript
 \begin{itemize}
-	\item Встроенное решение, не требующее отдельного сервера
-	\item Простое в настройке и использовании
+	\item Структурированность - позволяет логически организовывать элементы страницы
+	\item Универсальность - работает во всех современных браузерах как для статических страниц, так и для динамических веб-приложений
+	\item Кроссплатформенность - работает на любом устройстве (компьютерах, планшетах, смартфонах)
+	\item Адаптивность - поддерживает медиа-запросы и гибкие макеты
 \end{itemize}
 
-\subsection{Диаграмма компонентов}
 
-На рисунке \ref{fig:-components} представлена архитектура серверной части приложения.
+\subsection{Клиентская часть мессенджера}
 
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.8\linewidth]{"images/Диаграмма компонентов"}
-	\caption{Диаграмма компонентов серверной части}
-	\label{fig:-components}
-\end{figure}
 
-\subsection{Основные API-эндпоинты}
-
-\subsubsection{Аутентификация и пользователи}
-
-\begin{xltabular}{\textwidth}{|l|l|p{1.7cm}|X|}
-	\caption{API для работы с пользователями}\label{tab:users_api} \\ \hline
-	\centrow Поле & \centrow Тип & \centrow Метод & \centrow Описание \\ \hline
-	\thead{1} & \thead{2} & \centrow 3 & \centrow 4 \\ \hline
+\subsubsection{Структура проекта}
+\begin{xltabular}{\textwidth}{|l|X|}
+	\caption{Файловая структура клиентской части}\label{tab:project-structure} \\ \hline
+	\centrow{Тип} & \centrow{Описание} \\ \hline 
 	\endfirsthead
-	\continuecaption{Продолжение таблицы \ref{tab:users_api}}
-	\thead{1} & \thead{2} & \centrow 3 & \centrow 4 \\ \hline
-	\finishhead
-	/register & Регистрация & POST & Создание нового пользователя. Параметры: username, password \\ \hline 
-	/login & Аутентификация & POST & Вход в систему. Параметры: username, password \\ \hline 
-	/get\_user\_id & Информация & GET & Получение данных текущего пользователя \\ \hline 
+	
+	HTML-страницы & 
+	\begin{itemize}[leftmargin=*,nosep]
+		\item index.html — основной интерфейс мессенджера
+		\item login.html — страница авторизации
+		\item register.html — страница регистрации
+		\item 404.html, 500.html — страницы ошибок
+	\end{itemize} \\ \hline
+	
+	Стили & 
+	\begin{itemize}[leftmargin=*,nosep]
+		\item style.css — основные стили приложения
+		\item login.css, register.css — стили форм авторизации
+		\item error.css — стили страниц ошибок
+	\end{itemize} \\ \hline
+	
+	JavaScript & 
+	\begin{itemize}[leftmargin=*,nosep]
+		\item app.js — основной клиентский код 
+		\item login.js — обработка формы входа
+		\item register.js — обработка формы регистрации
+	\end{itemize} \\ \hline
+	
 \end{xltabular}
+
+\subsection{Ключевые функции и методы}
+
+\subsubsection{Управление интерфейсом}
+
+\begin{itemize}
+	\item \textbf{initUI()} - инициализация всех элементов интерфейса
+	\item \textbf{toggleSidebar()} - открытие/закрытие боковых панелей
+	\item \textbf{updateAuthButtons()} - обновление блока авторизации
+	\item \textbf{showToast(message, type)} - отображение уведомлений
+\end{itemize}
 
 \subsubsection{Работа с сообщениями}
 
-\begin{xltabular}{\textwidth}{|l|l|p{1.7cm}|X|}
-	\caption{API для работы с сообщениями}\label{tab:messages_api} \\ \hline
-	\centrow Поле & \centrow Тип & \centrow Метод & \centrow Описание \\ \hline
-	\thead{1} & \thead{2} & \centrow 3 & \centrow 4 \\ \hline
-	\endfirsthead
-	\continuecaption{Продолжение таблицы \ref{tab:messages_api}}
-	\thead{1} & \thead{2} & \centrow 3 & \centrow 4 \\ \hline
-	\finishhead
-	/get\_messages & Получение & GET & Запрос новых сообщений. Параметры: timestamp \\ \hline 
-	/send\_message & Отправка & POST & Отправка сообщения. Параметры: message, files[] \\ \hline 
-	/delete\_message/\{id\} & Удаление & DELETE & Удаление сообщения по ID \\ \hline 
-	/edit\_message/\{id\} & Редактирование & PUT & Изменение сообщения. Параметры: message \\ \hline 
-	/check\_messages & Проверка & GET & Проверка существования сообщений. Параметры: ids[] \\ \hline 
-	/check\_edited\_messages & Проверка & GET & Поиск измененных сообщений. Параметры: last\_timestamp \\ \hline 
-\end{xltabular}
-\newpage
-\subsubsection{Групповые чаты}
-
-\begin{xltabular}{\textwidth}{|l|l|p{1.7cm}|X|}
-	\caption{API для работы с группами}\label{tab:groups_api} \\ \hline
-	\centrow Поле & \centrow Тип & \centrow Метод & \centrow Описание \\ \hline
-	\thead{1} & \thead{2} & \centrow 3 & \centrow 4 \\ \hline
-	\endfirsthead
-	\continuecaption{Продолжение таблицы \ref{tab:groups_api}}
-	\thead{1} & \thead{2} & \centrow 3 & \centrow 4 \\ \hline
-	\finishhead
-	/create\_group & Создание & POST & Создание новой группы. Параметры: name \\ \hline 
-	/add\_to\_group & Добавление & POST & Приглашение пользователя. Параметры: group\_id, username \\ \hline 
-	/get\_groups & Список & GET & Получение групп пользователя \\ \hline 
-	/get\_group\_messages & Сообщения & GET & Получение сообщений группы. Параметры: group\_id \\ \hline 
-	/get\_group\_members & Участники & GET & Получение списка участников. Параметры: group\_id \\ \hline 
-	/leave\_group & Выход & POST & Покидание группы. Параметры: group\_id \\ \hline 
-	/change\_member\_role & Права & POST & Изменение роли. Параметры: group\_id, username, role \\ \hline 
-	/rename\_group & Переименование & POST & Изменение названия. Параметры: group\_id, new\_name \\ \hline 
-	/remove\_from\_group & Исключение & POST & Удаление участника. Параметры: group\_id, username \\ \hline 
-\end{xltabular}
-
-\subsubsection{Личные сообщения}
-
-\begin{xltabular}{\textwidth}{|l|l|p{1.7cm}|X|}
-	\caption{API для личных сообщений}\label{tab:private_api} \\ \hline
-	\centrow Поле & \centrow Тип & \centrow Метод & \centrow Описание \\ \hline
-	\thead{1} & \thead{2} & \centrow 3 & \centrow 4 \\ \hline
-	\endfirsthead
-	\continuecaption{Продолжение таблицы \ref{tab:private_api}}
-	\thead{1} & \thead{2} & \centrow 3 & \centrow 4 \\ \hline
-	\finishhead
-	/send\_private\_message & Отправка & POST & Отправка ЛС. Параметры: receiver, message \\ \hline 
-	/get\_private\_messages & Получение & GET & Получение ЛС. Параметры: user, timestamp \\ \hline 
-	/get\_private\_chats & Список & GET & Получение чатов пользователя \\ \hline 
-	/search\_users & Поиск & GET & Поиск пользователей. Параметры: q \\ \hline 
-\end{xltabular}
-
-\subsubsection{Дополнительные API}
-
-\begin{xltabular}{\textwidth}{|l|l|p{1.7cm}|X|}
-	\caption{Дополнительные API эндпоинты}\label{tab:additional_api} \\ \hline
-	\centrow Поле & \centrow Тип & \centrow Метод & \centrow Описание \\ \hline
-	\thead{1} & \thead{2} & \centrow 3 & \centrow 4 \\ \hline
-	\endfirsthead
-	\continuecaption{Продолжение таблицы \ref{tab:additional_api}}
-	\thead{1} & \thead{2} & \centrow 3 & \centrow 4 \\ \hline
-	\finishhead
-	/get\_group\_name & Информация & GET & Получение названия группы по ID \\ \hline 
-	/send\_system\_message & Системное & POST & Отправка системных сообщений \\ \hline 
-	/check\_groups\_updates & Проверка & GET & Проверка обновлений в группах \\ \hline 
-	/check\_private\_chats\_updates & Проверка & GET & Проверка новых ЛС \\ \hline 
-\end{xltabular}
-
-\subsection{Основные классы и функции}
-
-\subsubsection{Базовый класс View}
-
-Базовый класс для всех представлений, реализует:
 \begin{itemize}
-	\item Обработку HTTP-запросов
-	\item Чтение файлов
-	\item Формирование ответов
+	\item \textbf{sendMessage(e)} - обработка отправки сообщения
+	\item \textbf{loadMessages()} - загрузка сообщений текущего чата
+	\item \textbf{displayMessages(messages)} - отрисовка сообщений в чате
+	\item \textbf{enableMessageEditing()} - включение режима редактирования
+	\item \textbf{deleteMessageById()} - удаление сообщения
 \end{itemize}
 
-\subsubsection{Классы представлений}
+\subsubsection{Группы и чаты}
 
-Основные классы представлений:
 \begin{itemize}
-	\item \textbf{TemplateView} - базовый класс для шаблонов
-	\item \textbf{IndexView} - главная страница
-	\item \textbf{GetMessageView} - получение сообщений
-	\item \textbf{SendMessageView} - отправка сообщений
-	\item \textbf{RegisterView/LoginView} - аутентификация
-	\item \textbf{Group-related views} - управление группами
-	\item \textbf{PrivateMessage views} - личные сообщения
-	\item \textbf{GetGroupNameView} - получение названия группы
-	\item \textbf{SendSystemMessageView} - системные сообщения
-	\item \textbf{CheckGroupsUpdatesView} - проверка обновлений групп
-	\item \textbf{CheckPrivateChatsUpdatesView} - проверка новых личных сообщений
+	\item \textbf{loadGroups()} - загрузка списка групп
+	\item \textbf{selectGroup()} - выбор активной группы
+	\item \textbf{createGroup()} - создание новой группы
+	\item \textbf{loadParticipants()} - загрузка участников группы
+	\item \textbf{selectPrivateChat()} - выбор личного чата
 \end{itemize}
 
-\subsubsection{Вспомогательные функции}
+\subsubsection{Работа с файлами}
 
 \begin{itemize}
-	\item \textbf{json\_response} - формирование JSON-ответа
-	\item \textbf{forbidden\_response} - ответ 403 Forbidden
-	\item \textbf{get\_mime} - определение MIME-типа файла
-	\item \textbf{check\_group\_permissions} - проверка прав пользователя в группе
-	\item \textbf{hash\_password} - хеширование паролей
-	\item \textbf{check\_password} - проверка паролей
+	\item \textbf{updateFileIndicator()} - отображение выбранных файлов
+	\item \textbf{showPreviews(files)} - превью вложений перед отправкой
+	\item \textbf{clearFiles()} - очистка выбранных файлов
+	\item \textbf{downloadAllAttachments()} - скачивание всех вложений
 \end{itemize}
 
-\subsection{Схема базы данных}
+\subsection{Обработка состояний}
 
-Основные таблицы базы данных:
+Приложение использует несколько механизмов хранения состояния:
+
 \begin{itemize}
-	\item \textbf{users} - информация о пользователях
-	\item \textbf{group\_messages} - сообщения групп
-	\item \textbf{private\_messages} - личные сообщения
-	\item \textbf{groups} - информация о группах
-	\item \textbf{group\_members} - участники групп
-	\item \textbf{attachments} - вложения к сообщениям
+	\item \textbf{SessionStorage}:
+	\begin{itemize}
+		\item Текущий пользователь (username)
+		\item Выбранный чат/группа
+		\item Временные метки последних сообщений
+	\end{itemize}
+	
+	\item \textbf{Глобальные переменные}:
+	\begin{itemize}
+		\item Текущая группа (currentGroup)
+		\item Текущий личный чат (currentPrivateChat)
+		\item Временная метка последнего сообщения (lastTimestamp)
+	\end{itemize}
+	
+	\item \textbf{UI состояние}:
+	\begin{itemize}
+		\item Открытые/закрытые панели
+		\item Активные элементы интерфейса
+		\item  Модальные окна
+	\end{itemize}
+	
 \end{itemize}
 
-\subsection{Безопасность}
+\subsection{Механизмы обновления данных}
 
-Реализованные механизмы безопасности:
 \begin{itemize}
-	\item Хеширование паролей (bcrypt)
-	\item Валидация входных данных
-	\item Проверка прав доступа
+	\item \textbf{Периодический опрос}:
+	\begin{itemize}
+		\item checkForUpdates() - проверка новых сообщений
+		\item checkInterfaceUpdates() - обновление списков чатов
+	\end{itemize}
+	
+	\item \textbf{Дебаунс}:
+	\begin{itemize}
+		\item debouncedUpdate() - ограничение частоты запросов
+		\item debouncedLoadParticipants() - оптимизация загрузки участников
+	\end{itemize}
+	
+	\item \textbf{Событийная модель}:
+	\begin{itemize}
+		\item Обработчики действий пользователя
+		\item Реакция на изменения в DOM
+	\end{itemize}
+	
+\end{itemize}
+
+\subsection{Особенности реализации}
+
+\subsubsection{Оптимизации производительности}
+
+\begin{itemize}
+	\item Виртуализация списка сообщений (рендеринг только видимых элементов)
+	\item Кэширование данных на клиенте
+	\item Пакетная обработка обновлений
+	\item Оптимизированные селекторы DOM
+\end{itemize}
+
+\subsubsection{Безопасность}
+
+\begin{itemize}
+	\item Санитизация вводимых данных
+	\item Обработка ошибок API
+	\item Защита от XSS (экранирование вывода)
+	\item Валидация перед отправкой на сервер
+\end{itemize}
+
+\subsubsection{Адаптивный дизайн}
+
+\begin{itemize}
+	\item Медиа-запросы для разных разрешений
+	\item Динамическое изменение layout
+	\item Оптимизированные формы ввода для мобильных устройств
+	\item Гибкие контейнеры и элементы
 \end{itemize}
 
 \subsection{Обработка ошибок}
 
-Реализованы специальные представления для обработки ошибок:
+Клиентская часть реализует следующие механизмы обработки ошибок:
+
 \begin{itemize}
-	\item \textbf{NotFoundView} - 404 Not Found
-	\item \textbf{ForbiddenView} - 403 Forbidden
-	\item \textbf{InternalServerErrorView} - 500 Internal Server Error
+	\item Перехват ошибок API-запросов
+	\item Визуальное отображение ошибок пользователю
+	\item Автоматические повторные попытки для неудачных запросов
+	\item Восстановление состояния после ошибок
+	\item Перенаправление на страницы ошибок (404, 500) при необходимости
 \end{itemize}
+
